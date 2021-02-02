@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  margin-block-end: 0;
+  margin-block-start: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.header {
+  width: 20%;
+  height: 100vh;
+  background-color: #c3c3c3;
+  display: flex;
+  justify-content: center;
+}
+/* 
+.menuList {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.menuListItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+}
+
+.menuListLink {
+    width: 100%;
+    height: 100%;
+    background-color: #adadad;
+} */
