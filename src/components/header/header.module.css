@@ -8,29 +8,32 @@
 }
 
 .header {
-  width: 20%;
-  height: 100vh;
+  width: 100%;
+  height: 5vh;
   background-color: #c3c3c3;
   display: flex;
   justify-content: center;
 }
-/* 
-.menuList {
+
+.menu {
   width: 60%;
+}
+
+.menuList {
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-around;
 }
 
 .menuListItem {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 15%;
 }
 
 .menuListLink {
-    width: 100%;
-    height: 100%;
-    background-color: #adadad;
-} */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #afafaf;
+}
