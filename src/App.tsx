@@ -1,50 +1,89 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import logo from "./logo.svg";
-import Inputs from "./components/form/inputs/Intputs";
-import ContactsList from "./components/list/contactsList/ContactsList";
+import ContactsList from "./components/list/ContactsList";
+import Modal from "./components/modal/Modal";
 import "./App.css";
 
 function App() {
-  // interface User {
-  //   name: string;
-  //   id: number;
-  // }
-  // const user: User = {
-  //   name: "Hayes",
-  //   id: 0,
-  // };
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [alert, setAlert] = useState(false);
 
-  // useEffect(() => {
-  //   setList(baseList);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => setAlert(false), 2000);
+  }, [alert]);
 
-  // const baseList = [
-  //   {
-  //     name: "Bohdan",
-  //     number: "0631032579",
-  //   },
-  // ];
+  const contactsList = JSON.parse(localStorage.getItem("contacts") || "[]");
 
-  // const [list, setList] = useState(baseList);
+  interface User {
+    name: string;
+    number: number;
+  }
+
+  const handleForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const getName = formData.get("user_name");
+    const getNumber = Number(formData.get("user_number"));
+    const user: User = {
+      name: `${getName}`,
+      number: getNumber,
+    };
+    if (!Number.isNaN(getNumber)) {
+      contactsList.push(user);
+      localStorage.setItem("contacts", JSON.stringify(contactsList));
+      setName("");
+      setNumber("");
+    } else {
+      setAlert(true);
+    }
+  };
 
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      {alert ? <Modal /> : <></>}
+      <header className="App-header"></header>
+
+      <section className="formSection">
+        <form
+          action="/my_contacts"
+          method="post"
+          className="addingForm"
+          onSubmit={handleForm}
         >
-          Learn React
-        </a> */}
-        <Inputs />
-        <ContactsList />
-      </header>
+          <p className="contactsHeader">Contacts</p>
+          <ul className="formItemsList">
+            <li>
+              <label htmlFor="name">Name:</label>
+              <input
+                required
+                id="name"
+                name="user_name"
+                type="text"
+                placeholder="Ex.: John Doe"
+                value={name ? name : ""}
+                onChange={(e) => setName(e.target.value)}
+              ></input>
+            </li>
+            <li>
+              <label htmlFor="number">Phone number:</label>
+              <input
+                required
+                id="number"
+                name="user_number"
+                type="tel"
+                placeholder="Ex.: 8800553535"
+                value={number ? number : ""}
+                onChange={(e) => setNumber(e.target.value)}
+              ></input>
+            </li>
+            <li>
+              <button type="submit">Add contact</button>
+            </li>
+          </ul>
+        </form>
+      </section>
+      <ContactsList />
     </div>
   );
 }
