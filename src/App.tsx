@@ -5,21 +5,29 @@ import Modal from "./components/modal/Modal";
 import "./App.css";
 
 function App() {
+  // State management
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [alert, setAlert] = useState(false);
 
+  // Alert listener for modal window
   useEffect(() => {
     setTimeout(() => setAlert(false), 2000);
   }, [alert]);
 
-  const contactsList = JSON.parse(localStorage.getItem("contacts") || "[]");
+  // Variable where data is stored
+  const contactsList: Array<object> = JSON.parse(
+    localStorage.getItem("contacts") || "[]"
+  );
 
+  // My custom iterface for new contact
   interface User {
     name: string;
     number: number;
+    birthday?: number | string; // ! IMPORTANT (now it's disabled)
   }
 
+  // Form handler - we're getting data from input and storing it in local storage using User interface
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -42,7 +50,7 @@ function App() {
   return (
     <div className="App">
       {alert ? <Modal /> : <></>}
-      <header className="App-header"></header>
+      {/* <header className="App-header"></header> */}
 
       <section className="formSection">
         <form

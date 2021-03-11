@@ -1,0 +1,4 @@
+.myContacts {
+    display: flex;
+    flex-direction: column;
+}

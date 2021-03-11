@@ -1,19 +1,21 @@
 import React from "react";
+import css from "./contactList.module.css";
 
 const ContactsList = () => {
-  const contactsList = JSON.parse(localStorage.getItem("contacts") || "[]");
+  // Could've used "contactsList" from App component as a prop, but didn't - I may try later
+  const contactsList: Array<object> = JSON.parse(
+    localStorage.getItem("contacts") || "[]"
+  );
 
   return (
-    <>
-      <ul>
-        {contactsList.map((contact: any) => (
-          <span key={contact.number}>
-            {contact.name}, {contact.number}
-          </span>
-        ))}
-        <li></li>
-      </ul>
-    </>
+    <ul className={css.myContacts}>
+      {contactsList.map((contact: any) => (
+        <span key={contact.number}>
+          {contact.name}, {contact.number}
+        </span>
+      ))}
+      <li></li>
+    </ul>
   );
 };
 
