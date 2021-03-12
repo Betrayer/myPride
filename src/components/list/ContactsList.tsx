@@ -12,6 +12,7 @@ const ContactsList = () => {
       {contactsList.map((contact: any) => (
         <span key={contact.number}>
           {contact.name}, {contact.number}
+          {!contact.birthday ? null : `, ${contact.birthday}`}
         </span>
       ))}
       <li></li>
